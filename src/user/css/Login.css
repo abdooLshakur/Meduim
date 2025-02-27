@@ -1,0 +1,122 @@
+.modalBackground {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #ecececf2;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modalContainer {
+    width: 450px; /* Reduced width for a smaller login modal */
+    min-height: 400px; /* Adjusted height */
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 40px;
+  }
+  
+  .overlay {
+    background-color: rgba(255, 255, 255, 0.95);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    opacity: 90%;
+  }
+  
+  .modalContainer .title {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .titleCloseBtn {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .titleCloseBtn button {
+    background-color: transparent;
+    color: black;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+  }
+  .titleCloseBtn button:hover {
+    background-color: transparent;
+  }
+  
+  .modalContainer .body {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .login-form label {
+    text-align: left;
+    font-weight: 500;
+  }
+  
+  .login-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .login-btn {
+    background-color: #1a8917;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .login-btn:hover {
+    background-color: #157a13;
+  }
+  
+  .modal_sign_in {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #242424;
+  }
+  
+  .modal_sign_in a {
+    color: #1a8917;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .modal_footer {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: #6B6B6B;
+    margin-top: 10px;
+  }
+  
+  .modal_footer a {
+    color: #6B6B6B;
+    text-decoration: none;
+  }
+  
+  

@@ -1,0 +1,106 @@
+*{
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.landing_container{
+  background-color: #F7F4ED;
+
+}
+
+.nav_logo{
+  display: flex;
+  align-items: center;
+}
+.nav-logo h3{
+  font-size: 25px;
+  font-weight: 500;
+}
+.nav-wrapper{
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  margin: 10px auto;
+  height: 50px;
+}
+.Links_holder {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.Links_holder div{
+  padding: 10px 20px;
+}
+.Links_holder div a{
+  color: black;
+  text-decoration: none;
+  font-size: 15px;
+  outline: none;
+  cursor: pointer;
+}
+.getstarted-btn{
+  background-color: rgb(13, 12, 12);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.getstarted-btn:hover{
+  background-color: black;
+}
+.modal-btn{
+  background: transparent;
+  color: black;
+}
+.modal-btn:hover{
+  background-color: transparent;
+}
+.hr {
+  background-color: transparent;
+  height: 3px;
+}
+
+/* banner */
+.Banner{
+  width: 100%;
+  margin: 50px 0;
+}
+.Banner_text{
+  margin: 100px auto;
+  text-align: left;
+  width: 590px;
+}
+.Banner_text h1{
+  font-size: 80px;
+}
+.Banner_text DIV{
+  margin-bottom: 20px;
+}
+.landing-btn{
+  background-color: rgb(6, 6, 6);
+  color: white;
+  padding: 10px;
+  border-radius: 30px;
+  width: 30%;
+}
+.landing-btn:hover{
+  background-color: black;
+}
+.Banner_holder{
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  height: 74vh;
+  /* width: 60%; */
+}
+.side_image img{
+  height: 60vh;
+}
+.Footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 40px;
+}

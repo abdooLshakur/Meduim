@@ -1,0 +1,134 @@
+/* MediumCloneV2.css */
+
+.container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .search-bar {
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .main-content {
+    display: flex;
+    margin-top: 80px;
+  }
+  
+  .stories {
+    flex: 2;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 5px;
+  }
+  .sec1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .sidebar {
+    flex: 1;
+    padding: 20px;
+    background: #fff;
+    border-left: 1px solid #ddd;
+  }
+  
+  .title {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .tabs {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .tab {
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .active {
+    background: transparent;
+    color: black;
+    text-decoration:2px solid underline;
+  }
+  
+  .story-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .story-actions button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+  .import{
+    background-color: white;
+    color: black;
+  }
+ .write-story-btn{
+  background-color: rgb(24, 165, 24);
+  color: white;
+ }
+  .story-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .sidebar-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .tag {
+    display: inline-block;
+    background: #f0f0f0;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .delete-btn {
+    background-color: transparent;
+    color: red;
+    font-size: larger;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  
+  .delete-btn:active {
+    transform: scale(0.95);
+  }
+  

@@ -1,0 +1,270 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+}
+
+/* Page Container */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px 20px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: black;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+  display: inline-block;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.search-bar {
+  width: 300px;
+  padding: 8px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.write-btn {
+  background: none;
+  border: none;
+  color: black;
+  font-weight: bold;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.bell-icon {
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.profile-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 45px;
+  width: 280px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 1001;
+}
+
+.dropdown-menu a {
+  padding: 5px 15px;
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f4f4f4;
+}
+
+.dropdown-menu hr {
+  border: none;
+  height: 1px;
+  background-color: #ddd;
+  margin: 5px 0;
+}
+
+
+/* Content */
+.content {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  margin-top: 80px;
+  padding: 20px;
+}
+
+/* White Box Holding Content */
+.white-container {
+  display: flex;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  width: 100%;
+}
+
+/* Left Section */
+.left-section {
+  flex: 2;
+  padding-right: 20px;
+}
+
+.nav-tabs {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.nav-tabs a {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 15px;
+  padding-bottom: 5px;
+}
+
+.nav-tabs a.active {
+  border-bottom: 2px solid black;
+}
+
+.card {
+  background-color: #f8f8f8;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Right Section */
+.right-section {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-left: 1px solid #ddd;
+  /* Dividing line */
+  position: relative;
+}
+
+/* Profile Picture */
+.profile-pic-large {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.edit-link {
+  color: green;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Footer Inside Right Section */
+.right-footer {
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  color: gray;
+  width: 100%;
+  border-top: 1px solid #ddd;
+  position: absolute;
+  bottom: 0;
+}
+
+.right-footer a {
+  color: gray;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+.right-footer a:hover {
+  text-decoration: underline;
+}
+.edit-input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 9px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.save-btn, .cancel-btn {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.save-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #dc3545;
+  color: white;
+  margin-left: 10px;
+}
+
+.edit-link {
+  background-color: #28a745;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.edit-link:hover {
+  background-color: #28a745;
+}
+.file-input{
+  margin-top: 15px;
+}
