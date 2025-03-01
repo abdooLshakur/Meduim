@@ -83,7 +83,7 @@ function LoginPage({ close }) {
                                     <label>Password</label>
                                     <input type="password" name="password" value={formData.password} onChange={handleChange} required />
                                 </div>
-                                {error && <p className="error-message">{error}</p>} {/* Display error if login fails */}
+                                {error && <p className="error-message">{error}</p>}
                                 <div>
                                     <button className='login-btn' type="submit">Sign In</button>
                                 </div>
