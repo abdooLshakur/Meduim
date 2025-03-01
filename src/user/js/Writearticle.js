@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../css/Writearticle.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 
 function WriteArticle() {
@@ -9,8 +9,9 @@ function WriteArticle() {
   const [elements, setElements] = useState([{ type: "paragraph", content: "" }]);
   const [images, setImages] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const userId = "67285bc5f36ca1a312a4d533";
-
+  const storedUser = localStorage.getItem("user");
+  const id = storedUser ? JSON.parse(storedUser).id : null;
+  const navigate = useNavigate()
   const handleInputChange = (index, value) => {
     const updatedElements = [...elements];
     updatedElements[index].content = value;
@@ -65,13 +66,14 @@ function WriteArticle() {
     });
 
     try {
-      const response = await fetch(`http://localhost:5000/api/blog/Writearticle/${userId}`, {
+      const response = await fetch(`http://localhost:5000/api/blog/Writearticle/${id}`, {
         method: "POST",
         body: formData,
       });
       const data = await response.json();
       if (data.success) {
         alert("Article successfully created");
+        navigate("/homepage")
       } else {
         alert("Error creating article");
       }

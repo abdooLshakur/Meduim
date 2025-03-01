@@ -48,7 +48,7 @@ function SignPage({ close }) {
 
             if (response.ok) {
                 alert("Signup successful!");
-                navigate("/loginpage");
+                navigate("/login");
             } else {
                 alert("Signup failed!");
             }
@@ -81,7 +81,7 @@ function SignPage({ close }) {
                                     <div><button className='signup-btn' type="submit">Sign Up</button></div>
                                 </form>
                                 <div>
-                                    <span>Already have an account? <Link to="/signin">Sign in</Link></span>
+                                    <span>Already have an account? <Link to="/login">Sign in</Link></span>
                                 </div>
                             </div>
                         </div>

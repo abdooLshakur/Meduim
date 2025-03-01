@@ -41,17 +41,19 @@ function LoginPage({ close }) {
                 body: JSON.stringify(formData)
             });
     
-            const data = await response.json(); // Convert response to JSON
+            const data = await response.json(); 
     
-            if (response.ok && data.success) { // Check success status
+            if (response.ok && data.success) { 
                 alert("Login successful!");
     
-                // Store user data in localStorage
-                localStorage.setItem("user", JSON.stringify(data.data)); 
+                if (data && data.data) {
+                    localStorage.setItem("user", JSON.stringify(data.data));
+                }
+                
     
                 navigate("/homepage"); 
             } else {
-                setError(data.message || "Invalid email or password!"); // Show error message
+                setError(data.message || "Invalid email or password!"); 
             }
         } catch (error) {
             console.error("Error logging in:", error);

@@ -10,11 +10,10 @@ const Profile = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null); // Avatar preview
 
-  // Get userId from localStorage dynamically
+  // Get userId from sessionStorage dynamically
   const storedUser = localStorage.getItem("user");
   const userId = storedUser ? JSON.parse(storedUser).id : null;
 
-  console.log("User ID:", userId); // Debugging log
 
   useEffect(() => {
     if (storedUser) {
