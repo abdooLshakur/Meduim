@@ -163,7 +163,7 @@ function LandingPage() {
                                                 <div className="modal_sign_in">
                                                     <span>
                                                         Already have an account?
-                                                        <Link onClick={() => { openlogin(); closemodal(); }}> Sign in</Link>
+                                                        <Link onClick={() => { openlogin(); closemodal(); }}> Sign Up</Link>
                                                     </span>
 
                                                 </div>

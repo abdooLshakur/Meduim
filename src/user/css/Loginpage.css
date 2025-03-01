@@ -14,7 +14,7 @@
 /* Modal background */
 .modalBackground {
     background: #fff;
-    width: 400px;
+    min-width: 400px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     overflow: hidden;
