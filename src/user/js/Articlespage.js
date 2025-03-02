@@ -12,7 +12,7 @@ const Articlespage = () => {
 
   const fetchArticles = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/blog/Userarticles/${id}`);
+      const response = await fetch(`https://meduimapi-kd3u.onrender.com/api/blog/Userarticles/${id}`);
       const data = await response.json();
 
       console.log(data.data);
@@ -34,7 +34,7 @@ const Articlespage = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/blog/delete/${id}`, {
+      const response = await fetch(`https://meduimapi-kd3u.onrender.com/api/blog/delete/${id}`, {
         method: "DELETE",
       });
 

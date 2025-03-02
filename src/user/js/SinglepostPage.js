@@ -11,7 +11,7 @@ const SinglepostPage = ({ moreFromData, recommendedData }) => {
   console.log(moreFromData);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/blog/Singlearticle/${id}`)
+    fetch(`https://meduimapi-kd3u.onrender.com/api/blog/Singlearticle/${id}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data.data);
@@ -278,7 +278,7 @@ const SinglepostPage = ({ moreFromData, recommendedData }) => {
                   <div className="Singlepage_img">
                     <img
                       key={index}
-                      src={`${"http://localhost:5000"}/${element.content}`}
+                      src={`${"https://meduimapi-kd3u.onrender.com"}/${element.content}`}
                       alt="Article Visual"
                     />
                   </div>

@@ -67,7 +67,7 @@ function WriteArticle() {
     });
 
     try {
-      const response = await fetch(`http://localhost:5000/api/blog/Writearticle/${id}`, {
+      const response = await fetch(`https://meduimapi-kd3u.onrender.com/api/blog/Writearticle/${id}`, {
         method: "POST",
         body: formData,
       });

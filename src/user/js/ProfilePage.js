@@ -64,7 +64,7 @@ const Profile = () => {
         formData.append("avatar", selectedFile); // Only add avatar if selected
       }
 
-      const response = await fetch(`http://localhost:5000/update-user/${userId}`, {
+      const response = await fetch(`https://meduimapi-kd3u.onrender.com/update-user/${userId}`, {
         method: "PUT",
         body: formData,
       });
@@ -106,7 +106,7 @@ const Profile = () => {
           <div className="right-section">
             {/* Avatar Preview */}
             <img 
-              src={preview || `http://localhost:5000/${user?.avatar || "default-avatar.jpg"}`} 
+              src={preview || `https://meduimapi-kd3u.onrender.com/${user?.avatar || "default-avatar.jpg"}`} 
               alt="Profile" 
               className="profile-pic-large" 
             />

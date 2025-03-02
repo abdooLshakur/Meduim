@@ -12,7 +12,7 @@ function SignPage({ close }) {
         setshow(!show)
     }
     const closemodal = () => setshow(false)
-    const api = "http://localhost:5000";
+    const api = "https://meduimapi-kd3u.onrender.com";
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         full_name: "",

@@ -8,7 +8,7 @@ import "../css/Login.css";
 function LoginPage({ close }) {
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
-    const api = "http://localhost:5000";
+    const api = "https://meduimapi-kd3u.onrender.com";
     
     const openModal = () => setShow(true);
     const closeModal = () => setShow(false);
