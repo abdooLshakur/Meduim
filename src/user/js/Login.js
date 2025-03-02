@@ -81,7 +81,7 @@ function LoginPage({ close }) {
                                 </div>
                                 <div>
                                     <label>Password</label>
-                                    <input type="password" name="password" value={formData.password} onChange={handleChange} required />
+                                    <input type="current-password   " name="password" value={formData.password} onChange={handleChange} required />
                                 </div>
                                 {error && <p className="error-message">{error}</p>}
                                 <div>

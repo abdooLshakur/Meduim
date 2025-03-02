@@ -12,7 +12,7 @@ const Profile = () => {
 
   // Get userId from sessionStorage dynamically
   const storedUser = localStorage.getItem("user");
-  const userId = storedUser ? JSON.parse(storedUser).id : null;
+  const userId = storedUser ? JSON.parse(storedUser)._id : null;
 
 
   useEffect(() => {

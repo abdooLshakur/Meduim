@@ -6,51 +6,55 @@ import Navbar from "./Navbar";
 
 const Articlespage = () => {
   const [article, setarticle] = useState([]);
+  // Get id from sessionStorage dynamically
+  const storedUser = localStorage.getItem("user");
+  const id = storedUser ? JSON.parse(storedUser)._id : null;
+
   const fetchArticles = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/blog/all');
+      const response = await fetch(`http://localhost:5000/api/blog/Userarticles/${id}`);
       const data = await response.json();
-      
+
       console.log(data.data);
       setarticle(data.data);
     } catch (error) {
       console.error('Error fetching articles:', error);
     }
   };
-  
+
   useEffect(() => {
     fetchArticles();
   }, []);
-  
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-  
+
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`http://localhost:5000/api/blog/delete/${id}`, {
         method: "DELETE",
       });
-  
+
       const data = await response.json(); // Get response data
-  
+
       if (!response.ok) {
         throw new Error(data.message || "Failed to delete Article");
       }
-  
+
       console.log("Article deleted successfully:", data);
-  
+
       // Fetch updated articles list after deletion
       fetchArticles();
-  
+
     } catch (error) {
       console.error("Error deleting Article:", error.message);
     }
   };
-  
-  
+
+
 
 
   return (
