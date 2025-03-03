@@ -8,7 +8,7 @@ import "../css/Login.css";
 function LoginPage({ close }) {
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
-    const api = "https://meduimapi-kd3u.onrender.com";
+    const api = "http://localhost:5000";
     
     const openModal = () => setShow(true);
     const closeModal = () => setShow(false);
@@ -81,9 +81,9 @@ function LoginPage({ close }) {
                                 </div>
                                 <div>
                                     <label>Password</label>
-                                    <input type="current-password   " name="password" value={formData.password} onChange={handleChange} required />
+                                    <input type="password" name="password" value={formData.password} onChange={handleChange} required />
                                 </div>
-                                {error && <p className="error-message">{error}</p>}
+                                {error && <p className="error-message">{error}</p>} 
                                 <div>
                                     <button className='login-btn' type="submit">Sign In</button>
                                 </div>

@@ -11,7 +11,6 @@ function WriteArticle() {
   const [activeIndex, setActiveIndex] = useState(0);
   const storedUser = localStorage.getItem("user");
   const id = storedUser ? JSON.parse(storedUser)._id : null;
-  console.log(id)
   const navigate = useNavigate()
   const handleInputChange = (index, value) => {
     const updatedElements = [...elements];
