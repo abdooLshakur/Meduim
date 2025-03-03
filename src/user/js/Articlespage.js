@@ -87,7 +87,7 @@ const Articlespage = () => {
                       <div className="article_container" key={post._id}>
                         <div className="article_details">
                           <div className="Wrtiter_info">
-                            <div className="Writer_avatar"><img src={`http://localhost:5000/${post.user_avatar}`} /></div>
+                            <div className="Writer_avatar"><img src={`https://meduimapi-kd3u.onrender.com/${post.user_avatar}`} /></div>
                             <div className="writer_name">{post.user_name}</div>
                           </div>
                           <Link to={`/singlearticle/${post._id}`}>
@@ -98,7 +98,7 @@ const Articlespage = () => {
                         <div className="post_container_img">
                           {post.elements && post.elements.find((el) => el.type === 'image') ? (
                             <img
-                              src={`http://localhost:5000/${post.elements.find((el) => el.type === 'image').content}`}
+                              src={`https://meduimapi-kd3u.onrender.com/${post.elements.find((el) => el.type === 'image').content}`}
                               alt="Article Banner"
                             />
                           ) : (
