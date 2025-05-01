@@ -9,9 +9,16 @@
     padding: 8px 5px;
     border: 1px solid rgb(209, 207, 207);
 }
-.signup-form button{
-    background-color: black;
-    width: 120px;
-    border-radius: 25px;
-    margin-bottom: 20px;
-}
+.signup-btn{
+    background-color: #1a8917;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
+    width: 100px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .signup-btn:hover{
+    background-color: #157a13;
+  }

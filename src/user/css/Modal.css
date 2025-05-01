@@ -1,128 +1,160 @@
-.modalBackground {
-  width: 100vw;
-  min-height: 100vh;
-  background-color: #ecececf2;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-
-
-.modalContainer {
-  min-width: 400px;
-  min-height: 695px;
-  border-radius: 12px;
-  background-color: rgba(255, 255, 255, 0.95);
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  display: flex;
-  flex-direction: column;
-  padding: 44px 56px;
-}
-
-.overlay {
-  background-color: rgba(255, 255, 255, 0.95);
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: fixed;
-  opacity: 90%;
-
-}
-
-.modalContainer .title {
-  display: inline-block;
-  text-align: center;
-  margin: 20px 5px;
-  font-size: 28px;
-}
-
-.titleCloseBtn {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.titleCloseBtn button {
+.sign-btn {
   background-color: transparent;
   color: black;
+  padding: 10px;
   border: none;
-  font-size: 35px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Overlay background */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(235, 235, 235, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* Modal container */
+.modalBackground {
+  background-color: #fff;
+  border-radius: 12px;
+  width: 400px;
+  padding: 2rem;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+/* Close button */
+.titleCloseBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 24px;
+  background: none;
+  border: none;
   cursor: pointer;
 }
-.titleCloseBtn button:hover{
-  background-color: transparent;
-}
 
-.modalContainer .body {
-  margin-top: 60px;
-  display: block;
-  min-height: 40vh;
+/* Modal title */
+.title {
+  font-size: 1.5rem;
   text-align: center;
-  display: flex;
-  justify-content: center;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
 }
 
+/* Modal option buttons */
 .modal_signopt {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  text-align: left;
-  width: 400px;
-  gap: 10px;
-  padding: 8px;
-  margin: 10px;
-}
-.modal_signopt div{
+  gap: 1rem;
+  background: #f5f5f5;
+  padding: 12px 16px;
+  border-radius: 6px;
   cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background 0.2s ease;
 }
-.modal_signopt {
-  border: 1px solid black;
-  border-radius: 20px;
+
+.modal_signopt:hover {
+  background: #e8e8e8;
 }
 
 .modal_signpt_text {
-  width: 70%;
+  flex-grow: 1;
+  font-size: 1rem;
 }
 
-.modal_sign_in {
-
-  line-height: 24px;
-  font-size: 16px;
-  color: #242424;
-  font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  margin-top: 40px;
-  margin-bottom: 100px;
+/* Email link style */
+a.modal_signopt {
+  text-decoration: none;
+  color: inherit;
 }
 
-.modal_sign_in a {
+/* Footer */
+.modal_footer {
+  font-size: 0.85rem;
+  text-align: center;
+  margin-top: 1rem;
+  color: #666;
+}
+
+.modal_footer a {
   color: #1a8917;
   text-decoration: none;
 }
 
-.modal_footer {
-  width: 70%;
-  margin: 10px auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-size: 13px;
-  color: #6B6B6B;
+.modal_footer a:hover {
+  text-decoration: underline;
 }
 
-.modal_footer span a {
-  color: #6B6B6B;
+/* Sign in/up toggle */
+.modal_sign_in {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 1rem;
 }
-.signup-btn{
-  color: white;
-}
-.sign-btn{
-  background-color: transparent;
-  outline: none;
+
+.text-link {
+  background: none;
   border: none;
+  color: #1a8917;
+  font-weight: bold;
+  cursor: pointer;
+  padding-left: 4px;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+/* Smooth animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+/* Spinner */
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #1a8917;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

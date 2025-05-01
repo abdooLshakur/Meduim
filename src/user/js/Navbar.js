@@ -36,7 +36,7 @@ const Navbar = () => {
                             onClick={toggleDropdown}
                         />
                     ) : (
-                        <Link to="/login">
+                        <Link to="/">
                             <button className="login-btn">Login</button>
                         </Link>
                     )}
@@ -57,7 +57,7 @@ const Navbar = () => {
                             <Link to="/partner-program">Apply to the Partner Program</Link>
                             <Link to="/gift-membership">Gift a membership</Link>
                             <hr />
-                            <Link to="/logout" onClick={() => {
+                            <Link to="/" onClick={() => {
                                 localStorage.removeItem("user");
                                 setUser(null);
                             }}>Sign out</Link>

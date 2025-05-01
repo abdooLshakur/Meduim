@@ -1,192 +1,358 @@
 import { Link } from "react-router-dom";
-import sideImage from "../images/4_SdjkdS98aKH76I8eD0_qjw.webp";
+import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import "../css/Modal.css"
-import { useState } from "react";
-function LandingPage() {
-    const [showsignup, setshowsignup] = useState(false)
-    const [showlogin, setshowlogin] = useState(false)
+import "../css/Modal.css";
+import sideImage from "../images/4_SdjkdS98aKH76I8eD0_qjw.webp";
+import { useNavigate } from "react-router-dom";
+import "../css/Login.css";
+import "../css/Signup.css";
 
-    const openmodal = () => { setshowsignup(!showsignup) }
-    const openlogin = () => { setshowlogin(!showlogin) }
-    if (openlogin === true) {
-        closemodal(true)
-    }
-    const closemodal = () => setshowsignup(false)
-    const closelogin = () => setshowlogin(false)
+function LandingPage() {
+    const [showSignupopt, setShowSignupopt] = useState(false);
+    const [showLoginopt, setShowLoginopt] = useState(false);
+    const [showSignup, setShowSignup] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
+    const api = "https://meduimapi-kd3u.onrender.com";
+
+    const openSignupModal = () => {
+        setShowSignup(true);
+        setShowLogin(false);
+        setShowLoginopt(false);
+    };
+
+    const openLoginModal = () => {
+        setShowLogin(true);
+        setShowSignup(false);
+        setShowSignupopt(false);
+
+    };
+
+    const openSignupoptModal = () => {
+        setShowSignupopt(true);
+        setShowLoginopt(false);
+        setShowLogin(false);
+
+    };
+
+    const openLoginoptModal = () => {
+        setShowLoginopt(true);
+        setShowSignupopt(false);
+        setShowSignup(false);
+
+    };
+    const closeModals = () => {
+        setShowLogin(false);
+        setShowSignup(false);
+        setShowLoginopt(false);
+        setShowSignupopt(false);
+    };
+
+    ;
+                    // login
+    const [formData, setFormData] = useState({
+        email: "",
+        password: ""
+    });
+
+    const [error, setError] = useState(""); // Error state for incorrect login
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setError(""); // Clear previous error messages
+
+        try {
+            const response = await fetch(`${api}/api/blog/user-login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                alert("Login successful!");
+
+                if (data && data.data) {
+                    localStorage.setItem("user", JSON.stringify(data.data));
+                }
+                navigate("/homepage");
+                setIsLoading(false);
+            } else {
+                setError(data.message || "Invalid email or password!");
+            }
+        } catch (error) {
+            console.error("Error logging in:", error);
+            setError("An error occurred. Please try again.");
+        }
+    };
+
+
+
+                    // sign up
+    const [signupData, setsignupData] = useState({
+        full_name: "",
+        email: "",
+        bio: "",
+        pronounce: "",
+        avatar: null,
+        password: ""
+    });
+
+    const handlesignupChange = (e) => {
+        const { name, type, files, value } = e.target;
+        setsignupData(prevState => ({
+            ...prevState,
+            [name]: type === "file" ? files[0] : value
+        }));
+    };
+
+    const handlesignupSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        const formDataToSend = new FormData();
+        Object.keys(signupData).forEach(key => {
+            if (signupData[key]) {
+                formDataToSend.append(key, signupData[key]);
+            }
+        });
+
+        try {
+            const response = await fetch(`${api}/api/blog/register-user`, {
+                method: "POST",
+                body: formDataToSend
+            });
+
+            if (response.ok) {
+                alert("Signup successful!");
+                navigate(openLoginoptModal);
+                setIsLoading(false);
+            } else {
+                alert("Signup failed!");
+            }
+        } catch (error) {
+            console.error("Error signing up:", error);
+            alert("An error occurred. Please try again.");
+        }
+    };
     return (
-        < div className="landing_container">
+        <div className="landing_container">
             <nav className="nav-wrapper">
                 <div className="nav_logo">
-                    <div><h3>Medium</h3></div>
+                    <h3>Medium</h3>
                 </div>
                 <div className="Links_holder">
                     <div><Link to={"/homepage"}>Our Story</Link></div>
                     <div><Link to={"#"}>Membership</Link></div>
                     <div><Link to={"/createstory"}>Write</Link></div>
-
-
-                    {/* login */}
-                    <div >
-                        <button type="button" className="sign-btn" data-toggle="modal" data-target="#exampleModalLong" onClick={openlogin}>Sign in</button>
-                        {showlogin && (
-
-
-                            <div className='overlay'>
-
-                                <div className="modalBackground">
-
-                                    <div className="modalContainer">
-                                        <div className='titleCloseBtn'>
-                                            <button onClick={closelogin}>
-                                                <span>&times;</span>
-                                            </button>
-                                        </div>
-                                        <h5 className="title" >Join Medium.</h5>
-
-
-                                        <div class="body">
-                                            <div>
-                                                <div className="modal_signopt">
-                                                    <div>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="bt"><g id="google"><g id="google-vector" fill-rule="evenodd" clip-rule="evenodd"><path id="Shape" fill="#4285F4" d="M20.64 12.205q-.002-.957-.164-1.84H12v3.48h4.844a4.14 4.14 0 0 1-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615"></path><path id="Shape_2" fill="#34A853" d="M12 21c2.43 0 4.468-.806 5.957-2.18L15.05 16.56c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H3.958v2.332A9 9 0 0 0 12.001 21"></path><path id="Shape_3" fill="#FBBC05" d="M6.964 13.712a5.4 5.4 0 0 1-.282-1.71c0-.593.102-1.17.282-1.71V7.96H3.957A9 9 0 0 0 3 12.002c0 1.452.348 2.827.957 4.042z"></path><path id="Shape_4" fill="#EA4335" d="M12 6.58c1.322 0 2.508.455 3.441 1.346l2.582-2.58C16.463 3.892 14.427 3 12 3a9 9 0 0 0-8.043 4.958l3.007 2.332c.708-2.127 2.692-3.71 5.036-3.71"></path></g></g></svg>
-                                                    </div>
-                                                    <div className="modal_signpt_text">Sign in With Google</div>
-                                                </div>
-                                                <div className="modal_signopt">
-                                                    <div>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="bt"><g id="facebook"><g id="facebook-vector"><path fill="#1877F2" d="M22 12.002c0-5.523-4.477-10-10-10s-10 4.477-10 10c0 4.991 3.657 9.128 8.438 9.879v-6.988h-2.54v-2.891h2.54V9.799c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562v1.876h2.773l-.443 2.89h-2.33v6.989c4.78-.75 8.437-4.888 8.437-9.879"></path><path fill="#fff" d="m15.893 14.893.443-2.891h-2.773v-1.876c0-.79.387-1.562 1.63-1.562h1.26v-2.46s-1.144-.196-2.238-.196c-2.284 0-3.777 1.385-3.777 3.89v2.204h-2.54v2.89h2.54v6.989a10 10 0 0 0 3.124 0v-6.988z"></path></g></g></svg>
-                                                    </div>
-                                                    <div className="modal_signpt_text">Sign in With Facebook</div>
-                                                </div>
-                                                <div className="modal_signopt">
-                                                    <div>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="bt"><path fill="#242424" d="M13.346 10.932 18.88 4.5h-1.311l-4.805 5.585L8.926 4.5H4.5l5.803 8.446L4.5 19.69h1.311l5.074-5.898 4.053 5.898h4.426zM11.55 13.02l-.588-.84-4.678-6.693h2.014l3.776 5.4.588.842 4.907 7.02h-2.014z"></path></svg>
-                                                    </div>
-                                                    <div className="modal_signpt_text">Sign in With Apple</div>
-                                                </div>
-                                                <div className="modal_signopt">
-                                                    <div>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="bt"><g id="apple"><path id="apple-vector" fill="currentColor" d="M18.52 8.23c-.106.086-1.993 1.183-1.993 3.62 0 2.82 2.401 3.818 2.473 3.843-.011.06-.381 1.366-1.266 2.696-.788 1.17-1.612 2.34-2.865 2.34s-1.575-.751-3.022-.751c-1.41 0-1.91.775-3.056.775S6.845 19.67 5.925 18.34C4.86 16.778 4 14.35 4 12.048c0-3.694 2.329-5.653 4.621-5.653 1.218 0 2.233.825 2.998.825.728 0 1.863-.874 3.248-.874.525 0 2.412.05 3.654 1.885m-4.31-3.448c.572-.701.978-1.674.978-2.647 0-.135-.011-.272-.035-.382-.933.036-2.042.64-2.71 1.44-.526.616-1.016 1.589-1.016 2.575 0 .148.024.296.035.344a1.4 1.4 0 0 0 .25.025c.837 0 1.89-.578 2.497-1.355"></path></g></svg>
-                                                    </div>
-                                                    <div className="modal_signpt_text">Sign in With X</div>
-                                                </div>
-                                                <Link to={"/login"}>
-                                                <div className="modal_signopt">
-                                                    <div>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="bt"><g id="email-icon"><g id="Group 10123" stroke="#242424"><rect id="Rectangle 1488" width="17" height="13" x="3.5" y="5.505" rx="1"></rect><path id="Vector 107" stroke-linecap="round" d="m3.5 8.005 8.5 6 8.5-6"></path></g></g></svg>
-                                                    </div>
-                                                    <div className="modal_signpt_text">Sign in With Email</div>
-                                                </div>
-                                                </Link>
-
-                                                <div className="modal_sign_in">
-                                                    <span>
-                                                        Already have an account?
-                                                        <Link onClick={() => { openmodal(); closelogin(); }}> Sign in</Link>
-                                                    </span>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal_footer">
-                                            <div>
-                                                <span>Click “Sign up” to agree to Medium’s <Link>Terms of Service</Link> and acknowledge that
-                                                    Medium’s <Link>Privacy Policy</Link> applies to you.
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-
-
-
-
-                    {/* sign up */}
                     <div>
-                        <button className="getstarted-btn" data-toggle="modal" data-target="#exampleModalLong" onClick={openmodal}>Get Started</button>
-                        {showsignup && (
-                            <div className='overlay'>
-
-                                <div className="modalBackground">
-
-                                    <div className="modalContainer">
-                                        <div className='titleCloseBtn'>
-                                            <button onClick={closemodal}>
-                                                <span>&times;</span>
-                                            </button>
-                                        </div>
-                                        <h5 className="title" >Join Medium.</h5>
-
-                                        <div class="body">
-                                            <div>
-                                                <div className="modal_signopt">
-                                                    <div>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="bt"><g id="google"><g id="google-vector" fill-rule="evenodd" clip-rule="evenodd"><path id="Shape" fill="#4285F4" d="M20.64 12.205q-.002-.957-.164-1.84H12v3.48h4.844a4.14 4.14 0 0 1-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615"></path><path id="Shape_2" fill="#34A853" d="M12 21c2.43 0 4.468-.806 5.957-2.18L15.05 16.56c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H3.958v2.332A9 9 0 0 0 12.001 21"></path><path id="Shape_3" fill="#FBBC05" d="M6.964 13.712a5.4 5.4 0 0 1-.282-1.71c0-.593.102-1.17.282-1.71V7.96H3.957A9 9 0 0 0 3 12.002c0 1.452.348 2.827.957 4.042z"></path><path id="Shape_4" fill="#EA4335" d="M12 6.58c1.322 0 2.508.455 3.441 1.346l2.582-2.58C16.463 3.892 14.427 3 12 3a9 9 0 0 0-8.043 4.958l3.007 2.332c.708-2.127 2.692-3.71 5.036-3.71"></path></g></g></svg>
-                                                    </div>
-                                                    <div className="modal_signpt_text">Sign Up With Google</div>
-                                                </div>
-                                                <div className="modal_signopt">
-                                                    <div>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="bt"><g id="facebook"><g id="facebook-vector"><path fill="#1877F2" d="M22 12.002c0-5.523-4.477-10-10-10s-10 4.477-10 10c0 4.991 3.657 9.128 8.438 9.879v-6.988h-2.54v-2.891h2.54V9.799c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562v1.876h2.773l-.443 2.89h-2.33v6.989c4.78-.75 8.437-4.888 8.437-9.879"></path><path fill="#fff" d="m15.893 14.893.443-2.891h-2.773v-1.876c0-.79.387-1.562 1.63-1.562h1.26v-2.46s-1.144-.196-2.238-.196c-2.284 0-3.777 1.385-3.777 3.89v2.204h-2.54v2.89h2.54v6.989a10 10 0 0 0 3.124 0v-6.988z"></path></g></g></svg>
-                                                    </div>
-                                                    <div className="modal_signpt_text">Sign Up With Facebook</div>
-                                                </div>
-                                                <div className="modal_signopt">
-                                                    <div>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="bt"><path fill="#242424" d="M13.346 10.932 18.88 4.5h-1.311l-4.805 5.585L8.926 4.5H4.5l5.803 8.446L4.5 19.69h1.311l5.074-5.898 4.053 5.898h4.426zM11.55 13.02l-.588-.84-4.678-6.693h2.014l3.776 5.4.588.842 4.907 7.02h-2.014z"></path></svg>
-                                                    </div>
-                                                    <div className="modal_signpt_text">Sign Up With Apple</div>
-                                                </div>
-                                                <div className="modal_signopt">
-                                                    <div>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="bt"><g id="apple"><path id="apple-vector" fill="currentColor" d="M18.52 8.23c-.106.086-1.993 1.183-1.993 3.62 0 2.82 2.401 3.818 2.473 3.843-.011.06-.381 1.366-1.266 2.696-.788 1.17-1.612 2.34-2.865 2.34s-1.575-.751-3.022-.751c-1.41 0-1.91.775-3.056.775S6.845 19.67 5.925 18.34C4.86 16.778 4 14.35 4 12.048c0-3.694 2.329-5.653 4.621-5.653 1.218 0 2.233.825 2.998.825.728 0 1.863-.874 3.248-.874.525 0 2.412.05 3.654 1.885m-4.31-3.448c.572-.701.978-1.674.978-2.647 0-.135-.011-.272-.035-.382-.933.036-2.042.64-2.71 1.44-.526.616-1.016 1.589-1.016 2.575 0 .148.024.296.035.344a1.4 1.4 0 0 0 .25.025c.837 0 1.89-.578 2.497-1.355"></path></g></svg>
-                                                    </div>
-                                                    <div className="modal_signpt_text">Sign Up With X</div>
-                                                </div>
-                                                <Link to={"/signup"}>
-                                                    <div className="modal_signopt">
-
-                                                        <div>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="bt"><g id="email-icon"><g id="Group 10123" stroke="#242424"><rect id="Rectangle 1488" width="17" height="13" x="3.5" y="5.505" rx="1"></rect><path id="Vector 107" stroke-linecap="round" d="m3.5 8.005 8.5 6 8.5-6"></path></g></g></svg>
-                                                        </div>
-
-                                                        <div className="modal_signpt_text">Sign Up With Email</div>
-
-                                                    </div>
-                                                </Link>
-                                                <div className="modal_sign_in">
-                                                    <span>
-                                                        Already have an account?
-                                                        <Link onClick={() => { openlogin(); closemodal(); }}> Sign Up</Link>
-                                                    </span>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal_footer">
-                                            <div>
-                                                <span style={{ padding: "0 0 20px 0" }}>Forgot email or trouble signing in? <Link>Get help</Link>.</span><br />
-                                                <span>Click “Sign in” to agree to Medium’s <Link>Terms of Service</Link> and acknowledge that
-                                                    Medium’s <Link>Privacy Policy</Link> applies to you.
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
+                        <button className="sign-btn" onClick={openLoginoptModal}>
+                            Sign in
+                        </button>
                     </div>
-
+                    <div>
+                        <button className="getstarted-btn" onClick={openSignupoptModal}>
+                            Get Started
+                        </button>
+                    </div>
                 </div>
             </nav>
-            <hr className="hr" />
+
+            {/* Login option Modal */}
+            {showLoginopt && (
+                <div className="overlay">
+                    <div className="modalBackground">
+                        <div className="modalContainer">
+                            <div className="titleCloseBtn">
+                                <button onClick={closeModals}>
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <h5 className="title">Sign in to Medium</h5>
+
+                            <div className="body">
+                                <div className="modal_signopt">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 256 262" preserveAspectRatio="xMidYMid">
+                                        <path d="M255.93 133.52c0-11.01-.98-21.57-2.8-31.7H130.5v60h70.45c-3.04 16.29-12.23 30.07-26.14 39.27v32h42.4c24.8-22.84 39.12-56.55 39.12-99.57" fill="#4285F4" />
+                                        <path d="M130.5 261c35.33 0 64.95-11.71 86.6-31.79l-42.4-32c-11.77 7.89-26.82 12.54-44.2 12.54-33.98 0-62.8-22.92-73.15-53.85H13.75v33.76C34.37 234.66 79.37 261 130.5 261" fill="#34A853" />
+                                        <path d="M57.35 155.9c-2.76-8.19-4.34-16.9-4.34-25.9s1.58-17.71 4.34-25.9V70.34H13.75C5.04 87.14 0 108.02 0 130s5.04 42.86 13.75 59.66l43.6-33.76" fill="#FBBC05" />
+                                        <path d="M130.5 51.13c19.19 0 36.38 6.61 49.94 19.6l37.43-37.43C195.45 12.16 165.83 0 130.5 0 79.37 0 34.37 26.34 13.75 70.34L57.35 104c10.35-30.93 39.17-53.85 73.15-53.85" fill="#EA4335" />
+                                    </svg>
+                                    <div className="modal_signpt_text">Sign in with Google</div>
+                                </div>
+                                <div className="modal_signopt">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16" fill="currentColor">
+                                        <path d="M16 8.049c0-4.45-3.58-8.05-8-8.05S0 3.6 0 8.05C0 12.07 2.925 15.397 6.75 16v-5.62H4.71V8.05h2.04V6.275c0-2.016 1.207-3.132 3.055-3.132.885 0 1.812.157 1.812.157v1.98h-1.02c-1 0-1.31.62-1.31 1.255V8.05h2.23l-.357 2.33h-1.873V16C13.075 15.396 16 12.07 16 8.049z" />
+                                    </svg>
+                                    <div className="modal_signpt_text">Sign in with Facebook</div>
+                                </div>
+                                <button onClick={openLoginModal} className="modal_signopt">
+                                    <div className="modal_signpt_text">{isLoading ? <span className="spinner"></span> : "Sign in With Email"}</div>
+                                </button>
+                                <div className="modal_sign_in">
+                                    <span>
+                                        Don't have an account?
+                                        <button className="text-link" onClick={openSignupoptModal}>
+                                            Sign up
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className="modal_footer">
+                                <span>
+                                    By signing in, you agree to Medium’s <Link>Terms of Service</Link> and <Link>Privacy Policy</Link>.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Login Modal */}
+            {showLogin && (
+                <div className="overlay">
+                    <div className="modalBackground">
+                        <div className="modalContainer">
+                            <div className='titleCloseBtn'>
+                                <button onClick={closeModals}>
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <h5 className="title">Welcome Back</h5>
+                            <div className="body">
+                                <form className="login-form" onSubmit={handleSubmit}>
+                                    <div>
+                                        <label>Email</label>
+                                        <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+                                    </div>
+                                    <div>
+                                        <label>Password</label>
+                                        <input type="password" name="password" value={formData.password} onChange={handleChange} required />
+                                    </div>
+                                    {error && <p className="error-message">{error}</p>}
+                                    <div>
+                                        <button className='login-btn' type="submit"disabled={isLoading}>{isLoading ? <span className="spinner"></span> : "Sign In"}</button>
+                                    </div>
+                                </form>
+                                <div>
+                                    <span>Don't have an account? <button className="text-link" onClick={openSignupoptModal} > Sign Up </button></span>
+                                </div>
+                            </div>
+                            <div className="modal_footer">
+                                <div>
+                                    <span>Forgot password? <Link to="/reset">Reset here</Link>.</span><br />
+                                    <span>By signing in, you agree to our <Link to="/terms">Terms</Link> and <Link to="/privacy">Privacy Policy</Link>.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )};
+
+            {/* Signup option Modal */}
+            {showSignupopt && (
+                <div className="overlay">
+                    <div className="modalBackground">
+                        <div className="modalContainer">
+                            <div className="titleCloseBtn">
+                                <button onClick={closeModals}>
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <h5 className="title">Join Medium</h5>
+
+                            <div className="body">
+                                <div className="modal_signopt">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 256 262" preserveAspectRatio="xMidYMid">
+                                        <path d="M255.93 133.52c0-11.01-.98-21.57-2.8-31.7H130.5v60h70.45c-3.04 16.29-12.23 30.07-26.14 39.27v32h42.4c24.8-22.84 39.12-56.55 39.12-99.57" fill="#4285F4" />
+                                        <path d="M130.5 261c35.33 0 64.95-11.71 86.6-31.79l-42.4-32c-11.77 7.89-26.82 12.54-44.2 12.54-33.98 0-62.8-22.92-73.15-53.85H13.75v33.76C34.37 234.66 79.37 261 130.5 261" fill="#34A853" />
+                                        <path d="M57.35 155.9c-2.76-8.19-4.34-16.9-4.34-25.9s1.58-17.71 4.34-25.9V70.34H13.75C5.04 87.14 0 108.02 0 130s5.04 42.86 13.75 59.66l43.6-33.76" fill="#FBBC05" />
+                                        <path d="M130.5 51.13c19.19 0 36.38 6.61 49.94 19.6l37.43-37.43C195.45 12.16 165.83 0 130.5 0 79.37 0 34.37 26.34 13.75 70.34L57.35 104c10.35-30.93 39.17-53.85 73.15-53.85" fill="#EA4335" />
+                                    </svg>
+                                    <div className="modal_signpt_text">Sign up with Google</div>
+                                </div>
+                                <div className="modal_signopt">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16" fill="currentColor">
+                                        <path d="M16 8.049c0-4.45-3.58-8.05-8-8.05S0 3.6 0 8.05C0 12.07 2.925 15.397 6.75 16v-5.62H4.71V8.05h2.04V6.275c0-2.016 1.207-3.132 3.055-3.132.885 0 1.812.157 1.812.157v1.98h-1.02c-1 0-1.31.62-1.31 1.255V8.05h2.23l-.357 2.33h-1.873V16C13.075 15.396 16 12.07 16 8.049z" />
+                                    </svg>
+                                    <div className="modal_signpt_text">Sign up with Facebook</div>
+                                </div>
+                                <button onClick={openSignupModal} className="modal_signopt" disabled={isLoading}>
+                                    <div className="modal_signpt_text"> {isLoading ? <span className="spinner"></span> : "Sign up With Email"}</div>
+                                </button>
+                                <div className="modal_sign_in">
+                                    <span>
+                                        Already have an account?
+                                        <button className="text-link" onClick={openLoginoptModal}>
+                                            Sign in
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className="modal_footer">
+                                <span>
+                                    By signing up, you agree to Medium’s <Link>Terms of Service</Link> and <Link>Privacy Policy</Link>.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Signup Modal */}
+            {showSignup && (
+                <div className='overlay'>
+                    <div className="modalBackground">
+                        <div className="modalContainer">
+                            <div className='titleCloseBtn'>
+                                <button onClick={closeModals}>
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <h5 className="title">Join Medium.</h5>
+                            <div className="body">
+                                <div>
+                                    <form className="signup-form" onSubmit={handlesignupSubmit}>
+                                        <div><label>Full Name</label><input type="text" name="full_name" value={signupData.full_name} onChange={handlesignupChange} required /></div>
+                                        <div><label>Email</label><input type="email" name="email" value={signupData.email} onChange={handlesignupChange} required /></div>
+                                        <div><label>Bio</label><input type="text" name="bio" value={signupData.bio} onChange={handlesignupChange} /></div>
+                                        <div><label>Pronounce</label><input type="text" name="pronounce" value={signupData.pronounce} onChange={handlesignupChange} /></div>
+                                        <div><label>Avatar</label><input type="file" name="avatar" onChange={handlesignupChange} /></div>
+                                        <div><label>Password</label><input type="password" name="password" value={signupData.password} onChange={handlesignupChange} required /></div>
+                                        <div><button className='signup-btn' type="submit" disabled={isLoading}>{isLoading ? <span className="spinner"></span> : "Sign Up"}</button></div>
+                                    </form>
+                                    <div>
+                                        <span>Already have an account? <button className="text-link" onClick={openLoginoptModal} >Sign In </button></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="modal_footer">
+                                <div>
+                                    <span style={{ padding: "0 0 20px 0" }}>Forgot email or trouble signing in? <Link to="/help">Get help</Link>.</span><br />
+                                    <span>Click “Sign in” to agree to Medium’s <Link to="/terms">Terms of Service</Link> and acknowledge that
+                                        Medium’s <Link to="/privacy">Privacy Policy</Link> applies to you.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
 
             <div className="Banner">
                 <div className="Banner_holder">
@@ -200,6 +366,7 @@ function LandingPage() {
             </div>
 
             <hr className="hr" />
+
             <div className="Footer">
                 <div><span>Help</span></div>
                 <div><span>Status</span></div>
@@ -214,8 +381,9 @@ function LandingPage() {
             </div>
 
 
+
         </div>
-    )
+    );
 }
 
 export default LandingPage;
