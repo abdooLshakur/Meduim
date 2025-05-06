@@ -139,6 +139,7 @@ function LandingPage() {
             if (response.ok) {
                 alert("Signup successful!");
                 navigate(openLoginoptModal);
+                setShowLogin(true)
                 setIsLoading(false);
             } else {
                 alert("Signup failed!");
