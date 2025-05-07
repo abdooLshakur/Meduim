@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [user, setUser] = useState(null);
+    const api = "https://meduimapi-kd3u.onrender.com";
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
@@ -30,7 +31,7 @@ const Navbar = () => {
                 <div className="profile-container">
                     {user ? (
                         <img
-                            src={`http://localhost:5000/${user.avatar || "default-avatar.jpg"}`} // Use user's avatar or default image
+                            src={`${api}/${user.avatar || "default-avatar.jpg"}`} // Use user's avatar or default image
                             alt="Profile"
                             className="profile-icon"
                             onClick={toggleDropdown}
@@ -44,18 +45,18 @@ const Navbar = () => {
                         <div className="dropdown-menu">
                             <Link to="/profile">Profile</Link>
                             <Link to="/articles">Library</Link>
-                            <Link to="/stories">Stories</Link>
-                            <Link to="/stats">Stats</Link>
+                            <Link to="#">Stories</Link>
+                            <Link to="#">Stats</Link>
                             <hr />
-                            <Link to="/settings">Settings</Link>
-                            <Link to="/recommendations">Refine recommendations</Link>
-                            <Link to="/publications">Manage publications</Link>
-                            <Link to="/help">Help</Link>
+                            <Link to="#">Settings</Link>
+                            <Link to="#">Refine recommendations</Link>
+                            <Link to="#">Manage publications</Link>
+                            <Link to="#">Help</Link>
                             <hr />
-                            <Link to="/membership">Become a Medium member</Link>
-                            <Link to="/apply-author">Apply for author verification</Link>
-                            <Link to="/partner-program">Apply to the Partner Program</Link>
-                            <Link to="/gift-membership">Gift a membership</Link>
+                            <Link to="#">Become a Medium member</Link>
+                            <Link to="#">Apply for author verification</Link>
+                            <Link to="#">Apply to the Partner Program</Link>
+                            <Link to="#">Gift a membership</Link>
                             <hr />
                             <Link to="/" onClick={() => {
                                 localStorage.removeItem("user");
